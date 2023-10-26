@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "321494869402",
+    "project_id": "eventomagicofb",
+    "storage_bucket": "eventomagicofb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321494869402:android:0f6ba8c55e1fbfbb9f8623",
+        "android_client_info": {
+          "package_name": "com.example.magiceventkt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaaMvxOAMBbtKRb_I6DlirKHuIeGSg2Uc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

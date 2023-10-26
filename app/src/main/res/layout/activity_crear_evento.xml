@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/blanco_suave"
+    tools:context=".activities.CrearEventoActivity">
+
+
+    <EditText
+        android:id="@+id/editNombreEvento"
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:ems="10"
+        android:hint="@string/nombre_evento"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editDesc"
+        android:layout_width="match_parent"
+        android:layout_height="142dp"
+        android:ems="10"
+        android:hint="@string/desc_evento"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editFecha"
+        android:layout_width="match_parent"
+        android:layout_height="99dp"
+        android:ems="10"
+        android:hint="@string/fecha_evento"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/editUbicacion"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:ems="10"
+        android:hint="@string/ubi_evento"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/btnGuardarEvento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_guardaEvento" />
+
+    <Button
+        android:id="@+id/btnCancelarEve"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_Cancelar" />
+
+</LinearLayout>

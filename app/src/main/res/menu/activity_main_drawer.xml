@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item android:id="@+id/nav_itemNuevo"
+            android:icon="@drawable/eventadd"
+            android:title="@string/create_evn"/>
+        <item android:id="@+id/nav_itemMisEve"
+            android:icon="@drawable/listevent"
+            android:title="@string/mis_evn"/>
+        <item android:id="@+id/nav_itemCalendario"
+            android:icon="@drawable/calendar"
+            android:title="@string/calendar"/>
+        <item android:id="@+id/nav_itemPerfil"
+            android:icon="@drawable/profile"
+            android:title="@string/mi_prof"/>
+        <item android:id="@+id/nav_itemConfig"
+            android:icon="@drawable/config"
+            android:title="@string/config"/>
+    </group>
+</menu>

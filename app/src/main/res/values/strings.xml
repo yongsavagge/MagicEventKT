@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">MagicEventKT</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="create_evn">Crear Evento</string>
+    <string name="mis_evn">Mis Eventos</string>
+    <string name="calendar">Calendario</string>
+    <string name="mi_prof">Mi perfil</string>
+    <string name="config">Configuraciones</string>
+    <string name="welcome">Bienvenido/a</string>ç
+    <string name="nombre_evento">Nombre del Evento</string>
+    <string name="desc_evento">Descripción del Evento</string>
+    <string name="fecha_evento">Fecha del Evento</string>
+    <string name="ubi_evento">Ubicación del Evento</string>
+    <string name="btn_guardaEvento">Guardar Evento</string>
+    <string name="btn_Cancelar">Cancelar</string>
+    <string name="evento">Evento</string>
+    <string name="edit">Editar</string>
+    <string name="eliminar">Eliminar evento</string>
+    <string name="guardar">Guardar cambios</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+</resources>
