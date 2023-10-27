@@ -23,4 +23,9 @@
     <string name="editchanges">Editar Perfil</string>
     <string name="closesession">Cerrar Sesión</string>
     <string name="welc_profile">Bienvenido a tu perfil</string>
+    <string name="cerrarSesionApprove">¿Estás seguro de que deseas cerrar sesión?</string>
+    <string name="eliminarApprove">¿Estás seguro de que deseas eliminar el evento?</string>
+    <string name="approve">Si</string>
+    <string name="deny">No</string>
+
 </resources>

@@ -1,16 +1,15 @@
 package com.example.magiceventkt.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.magiceventkt.R
 import com.example.magiceventkt.adapters.eveRecyclerAdapter
 import com.example.magiceventkt.models.EventoModel
 import com.example.magiceventkt.models.editActivity
-import com.google.firebase.Firebase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference

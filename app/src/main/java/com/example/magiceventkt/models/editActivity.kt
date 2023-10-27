@@ -43,9 +43,21 @@ class editActivity : AppCompatActivity() {
         }
 
         btnEliminarEvento.setOnClickListener {
-            deleteRecord(
-                intent.getStringExtra("eventoID").toString()
-            )
+
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Eliminar Evento")
+            builder.setMessage(R.string.eliminarApprove)
+
+            builder.setPositiveButton(R.string.approve){ dialog, which ->
+                deleteRecord(
+                    intent.getStringExtra("eventoID").toString()
+                )
+            }
+            builder.setNegativeButton(R.string.deny){ dialog, which ->
+                dialog.dismiss()
+            }
+            val alertDialog = builder.create()
+            alertDialog.show()
         }
 
         // Inicialización y configuración de las vistas con datos iniciales
@@ -65,8 +77,8 @@ class editActivity : AppCompatActivity() {
             finish()
             startActivity(intent)
         }.addOnFailureListener{
-            error -> Toast.makeText(this, "Error al borrar el evento", Toast.LENGTH_SHORT).show()
-        } 
+                error -> Toast.makeText(this, "Error al borrar el evento", Toast.LENGTH_SHORT).show()
+        }
     }
 
     // Función para inicializar vistas adicionales (puede dejarse vacía)

@@ -1,6 +1,8 @@
 package com.example.magiceventkt.activities
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
@@ -9,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.magiceventkt.R
 import com.example.magiceventkt.models.PerfilModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -51,6 +54,32 @@ class ProfileActivity : AppCompatActivity() {
                 habilitarEdicion()
             }
         }
+
+        btnCloseSession.setOnClickListener {
+            // Crear un AlertDialog de confirmación
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle(R.string.closesession)
+            builder.setMessage(R.string.cerrarSesionApprove)
+
+            builder.setPositiveButton(R.string.approve) { dialog, which ->
+                cerrarSesion() // Función para cerrar sesión
+            }
+
+            builder.setNegativeButton(R.string.deny) { dialog, which ->
+                dialog.dismiss()
+            }
+
+            val alertDialog = builder.create()
+            alertDialog.show()
+        }
+    }
+
+    private fun cerrarSesion() {
+        FirebaseAuth.getInstance().signOut()
+        Toast.makeText(this, "Has cerrado sesión exitosamente!", Toast.LENGTH_SHORT).show()
+        val intentLogin = Intent(this, LoginActivity::class.java)
+        startActivity(intentLogin)
+        finish()
     }
 
     private fun guardarCambios() {
@@ -104,6 +133,9 @@ class ProfileActivity : AppCompatActivity() {
                 if (dataSnapshot.exists()) {
                     val perfilModel = dataSnapshot.getValue(PerfilModel::class.java)
                     mostrarDatosDePerfil(perfilModel)
+                } else {
+                    // Si no hay datos en la base de datos, establece los campos de texto en blanco
+                    mostrarDatosDePerfil(null)
                 }
             }
 
@@ -112,7 +144,7 @@ class ProfileActivity : AppCompatActivity() {
             }
         })
 
-        // Cargar los datos almacenados en SharedPreferences
+        // Cargar los datos almacenados en SharedPreferences con operador ?.
         val firstName = sharedPreferences.getString("firstName", "")
         val lastName = sharedPreferences.getString("lastName", "")
         val phone = sharedPreferences.getString("phone", "")
@@ -139,9 +171,9 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun mostrarDatosDePerfil(perfilModel: PerfilModel?) {
-        etFirstName.setText(perfilModel?.firstName)
-        etLastName.setText(perfilModel?.lastName)
-        etPhone.setText(perfilModel?.phone)
-        etEmail.setText(perfilModel?.email)
+        etFirstName.setText(perfilModel?.firstName ?: "")
+        etLastName.setText(perfilModel?.lastName ?: "")
+        etPhone.setText(perfilModel?.phone ?: "")
+        etEmail.setText(perfilModel?.email ?: "")
     }
 }
