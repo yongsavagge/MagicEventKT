@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/nav_header"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
-    android:background="@color/negro_suave"
+    android:layout_height="200dp"
+    android:background="@color/blanco_suave"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
@@ -11,17 +11,22 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
     <ImageView
         android:id="@+id/nav_header_imageView"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_width="115dp"
+        android:layout_height="104dp"
+        android:src="@drawable/logo2" />
+
     <TextView
         android:id="@+id/nav_header_textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="52dp"
         android:paddingTop="16dp"
-        android:text="testing"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:text="@string/name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/negro_suave"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

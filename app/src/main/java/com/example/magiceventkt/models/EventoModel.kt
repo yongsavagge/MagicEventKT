@@ -1,7 +1,4 @@
 package com.example.magiceventkt.models
-
-import java.util.Date
-
 data class EventoModel(
     var eventoID: String? = null,
     var nombreEvento: String? = null,

@@ -1,9 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/blanco_suave"
+    android:padding="16dp"
+    android:gravity="center"
     tools:context=".activities.ProfileActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Campo para el nombre -->
+    <ImageView
+        android:id="@+id/imgLogo_Profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo2" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/welc_profile"
+        android:textSize="22sp" />
+
+    <EditText
+        android:id="@+id/etFirstName"
+        android:layout_width="378dp"
+        android:layout_height="61dp"
+        android:hint="Nombre"
+        android:inputType="text"
+        android:enabled="false"/>
+
+    <!-- Campo para el apellido -->
+    <EditText
+        android:id="@+id/etLastName"
+        android:layout_width="378dp"
+        android:layout_height="61dp"
+        android:hint="Apellido"
+        android:inputType="text"
+        android:enabled="false"/>
+
+    <!-- Campo para el teléfono -->
+    <EditText
+        android:id="@+id/etPhone"
+        android:layout_width="378dp"
+        android:layout_height="61dp"
+        android:hint="Teléfono"
+        android:inputType="phone"
+        android:enabled="false"/>
+
+    <!-- Campo para el correo -->
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="378dp"
+        android:layout_height="61dp"
+        android:hint="Correo"
+        android:inputType="textEmailAddress"
+        android:enabled="false"/>
+
+    <!-- Campo para el género -->
+
+    <!-- Botón para guardar cambios -->
+    <Button
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/editchanges"
+        android:id="@+id/btnSave"
+        android:layout_gravity="center" />
+
+    <Button
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:id="@+id/btnCloseSession"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/closesession" />
+</LinearLayout>
