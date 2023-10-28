@@ -43,6 +43,7 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        // Inicialización de las vistas
         etFirstName = findViewById(R.id.etFirstName)
         etLastName = findViewById(R.id.etLastName)
         etPhone = findViewById(R.id.etPhone)
@@ -50,6 +51,7 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         btnSave = findViewById(R.id.btnSave)
         btnCloseSession = findViewById(R.id.btnCloseSession)
 
+        // Inicialización de la base de datos y preferencias compartidas
         dbRef = FirebaseDatabase.getInstance().getReference("PerfilUsuario")
         sharedPreferences = getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
 
@@ -57,6 +59,7 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         leerDatosPerfil()
         isEditMode = false
 
+        // Configurar el botón de guardado o edición
         btnSave.setOnClickListener {
             if (isEditMode) {
                 guardarCambios()
@@ -65,6 +68,7 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             }
         }
 
+        // Configurar el botón de cierre de sesión
         btnCloseSession.setOnClickListener {
             // Crear un AlertDialog de confirmación
             val builder = AlertDialog.Builder(this)
@@ -83,21 +87,26 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             alertDialog.show()
         }
 
+        // Configuración de la barra de herramientas (Toolbar)
         val toolbar: Toolbar = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)
 
+        // Inicialización del DrawerLayout
         drawer = findViewById(R.id.drawer_layout)
 
+        // Configuración del ActionBarDrawerToggle para abrir y cerrar el menú lateral
         toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
 
+        // Configuración de la acción de inicio y la habilitación de botón de inicio en la barra de herramientas
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
 
+        // Configuración del menú de navegación
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
-
     }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val intentCrear = Intent(this, CrearEventoActivity::class.java)
         val intentMisEve = Intent(this, MisEventosActivity::class.java)
@@ -159,7 +168,7 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             return
         }
 
-        val usuarioID = "usuarioID" // Reemplaza con el ID real del usuario actual
+        val usuarioID = "usuarioID"
 
         val usuario = PerfilModel(usuarioID, firstName, lastName, phone, email)
 
@@ -180,7 +189,7 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     }
 
     private fun leerDatosPerfil() {
-        val usuarioID = "usuarioID" // Reemplaza con el ID real del usuario actual
+        val usuarioID = "usuarioID"
 
         dbRef.child(usuarioID).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {

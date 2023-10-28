@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MagicEventKT"
         tools:targetApi="31">
         <activity
+            android:name=".activities.signUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".models.editActivity"
             android:exported="false" />
         <activity

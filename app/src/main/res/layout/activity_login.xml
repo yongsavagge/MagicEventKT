@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/blanco_suave"
     tools:context=".activities.LoginActivity">
 
@@ -13,12 +13,7 @@
         android:layout_width="223dp"
         android:layout_height="219dp"
         android:src="@drawable/logo2"
-        app:layout_constraintBottom_toTopOf="@+id/userEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        android:layout_gravity="center"/>
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/userEditText"
@@ -26,34 +21,26 @@
         android:layout_height="59dp"
         android:hint="Usuario"
         android:inputType="text"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/pswEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoImageView"
-        app:layout_constraintVertical_chainStyle="packed" />
+        android:minHeight="48dp" />
+
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/pswEditText"
         android:layout_width="409dp"
         android:layout_height="59dp"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnInicioSesion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userEditText"
-        app:layout_constraintVertical_chainStyle="packed" />
+        android:minHeight="48dp" />
 
     <Button
         android:id="@+id/btnInicioSesion"
-        style="@style/Widget.Material3.Button.ElevatedButton"
         android:layout_width="418dp"
         android:layout_height="64dp"
-        android:text="Iniciar Sesión"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pswEditText"
-        app:layout_constraintVertical_chainStyle="packed" />
+        android:text="Iniciar Sesión" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/btnRegistrate"
+        android:layout_width="418dp"
+        android:layout_height="64dp"
+        android:text="@string/noaccount" />
+
+</LinearLayout>

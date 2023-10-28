@@ -1,6 +1,5 @@
 package com.example.magiceventkt.activities
 
-
 import android.content.Intent
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +14,6 @@ import com.example.magiceventkt.R
 import com.google.android.material.navigation.NavigationView
 
 class menuInicio : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
     private lateinit var drawer: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
 
@@ -26,26 +24,29 @@ class menuInicio : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
         val toolbar: Toolbar = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)
 
+        // Inicialización del DrawerLayout
         drawer = findViewById(R.id.drawer_layout)
 
+        // Configuración del ActionBarDrawerToggle
         toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
 
+        // Configuración del menú de navegación
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
 
-        // Se llama cada botón que está en el Layout de @MenuInicio
+        // BOTONES
         val btnCrear = findViewById<Button>(R.id.btnCrear)
-        btnCrear.setOnClickListener{
+        btnCrear.setOnClickListener {
             val intentCrear = Intent(this, CrearEventoActivity::class.java)
             startActivity(intentCrear)
         }
 
         val btnMisEve = findViewById<Button>(R.id.btnMisEve)
-        btnMisEve.setOnClickListener{
+        btnMisEve.setOnClickListener {
             val intentMisEve = Intent(this, MisEventosActivity::class.java)
             startActivity(intentMisEve)
         }
@@ -61,15 +62,15 @@ class menuInicio : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
             val intentProfile = Intent(this, ProfileActivity::class.java)
             startActivity(intentProfile)
         }
-
     }
 
+    // Manejo de elementos del menú de navegación
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val intentCrear = Intent(this, CrearEventoActivity::class.java)
         val intentMisEve = Intent(this, MisEventosActivity::class.java)
         val intentCalen = Intent(this, CalendarActivity::class.java)
         val intentProfile = Intent(this, ProfileActivity::class.java)
-        when (item.itemId){
+        when (item.itemId) {
             R.id.nav_itemNuevo -> startActivity(intentCrear)
             R.id.nav_itemMisEve -> startActivity(intentMisEve)
             R.id.nav_itemCalendario -> startActivity(intentCalen)
@@ -79,7 +80,7 @@ class menuInicio : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
         return true
     }
 
-    override fun onPostCreate(savedInstanceState: Bundle?){
+    override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         toggle.syncState()
     }
@@ -90,7 +91,7 @@ class menuInicio : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (toggle.onOptionsItemSelected(item)){
+        if (toggle.onOptionsItemSelected(item)) {
             return true
         }
         return super.onOptionsItemSelected(item)

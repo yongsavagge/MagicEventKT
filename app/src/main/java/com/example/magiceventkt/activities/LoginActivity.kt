@@ -33,6 +33,12 @@ class LoginActivity : AppCompatActivity() {
         btnInicioSesion.setOnClickListener {
             signIn(usuario.text.toString(), contrasena.text.toString())
         }
+
+        val btnCreaCuenta = findViewById<Button>(R.id.btnRegistrate)
+        btnCreaCuenta.setOnClickListener {
+            val intentC = Intent(this, signUpActivity::class.java)
+            startActivity(intentC)
+        }
     }
 
     // Validación de los elementos entregados por el usuario y arrojar un error en caso de que sean erróneos
