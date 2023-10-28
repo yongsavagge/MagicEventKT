@@ -24,7 +24,6 @@ class CrearEventoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     private lateinit var editFecha: EditText
     private lateinit var editUbicacion: EditText
     private lateinit var btnGuardarEvento: Button
-    private lateinit var btnCancelarEve: Button
     private lateinit var dbRef: DatabaseReference
     private lateinit var drawer: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
@@ -39,7 +38,6 @@ class CrearEventoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         editUbicacion = findViewById(R.id.editUbicacion)
 
         btnGuardarEvento = findViewById(R.id.btnGuardarEvento)
-        btnCancelarEve = findViewById(R.id.btnCancelarEve)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MagicEventKT</string>
+    <string name="app_name">Evento Mágico</string>
     <string name="name">Evento Mágico</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="create_evn">Crear Evento</string>

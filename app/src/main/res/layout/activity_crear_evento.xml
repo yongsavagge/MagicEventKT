@@ -62,13 +62,6 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_guardaEvento" />
 
-        <Button
-            style="@style/Widget.Material3.Button.ElevatedButton"
-            android:id="@+id/btnCancelarEve"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_Cancelar" />
-
     </LinearLayout>
 
     <!-- NavigationView (menú lateral) -->
