@@ -1,58 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:id="@+id/drawer_layout"
     android:background="@color/blanco_suave"
     tools:context=".activities.CrearEventoActivity">
 
-
-    <EditText
-        android:id="@+id/editNombreEvento"
+    <!-- Contenido principal -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="94dp"
-        android:ems="10"
-        android:hint="@string/nombre_evento"
-        android:inputType="text" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editDesc"
-        android:layout_width="match_parent"
-        android:layout_height="142dp"
-        android:ems="10"
-        android:hint="@string/desc_evento"
-        android:inputType="text" />
+        <!-- Toolbar -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_main"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways" />
 
-    <EditText
-        android:id="@+id/editFecha"
-        android:layout_width="match_parent"
-        android:layout_height="99dp"
-        android:ems="10"
-        android:hint="@string/fecha_evento"
-        android:inputType="date" />
+        <EditText
+            android:id="@+id/editNombreEvento"
+            android:layout_width="match_parent"
+            android:layout_height="94dp"
+            android:ems="10"
+            android:hint="@string/nombre_evento"
+            android:inputType="text" />
 
-    <EditText
-        android:id="@+id/editUbicacion"
-        android:layout_width="match_parent"
-        android:layout_height="86dp"
-        android:ems="10"
-        android:hint="@string/ubi_evento"
-        android:inputType="text" />
+        <EditText
+            android:id="@+id/editDesc"
+            android:layout_width="match_parent"
+            android:layout_height="142dp"
+            android:ems="10"
+            android:hint="@string/desc_evento"
+            android:inputType="text" />
 
-    <Button
-        style="@style/Widget.Material3.Button.ElevatedButton"
-        android:id="@+id/btnGuardarEvento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_guardaEvento" />
+        <EditText
+            android:id="@+id/editFecha"
+            android:layout_width="match_parent"
+            android:layout_height="99dp"
+            android:ems="10"
+            android:hint="@string/fecha_evento"
+            android:inputType="date" />
 
-    <Button
-        style="@style/Widget.Material3.Button.ElevatedButton"
-        android:id="@+id/btnCancelarEve"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_Cancelar" />
+        <EditText
+            android:id="@+id/editUbicacion"
+            android:layout_width="match_parent"
+            android:layout_height="86dp"
+            android:ems="10"
+            android:hint="@string/ubi_evento"
+            android:inputType="text" />
 
-</LinearLayout>
+        <Button
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/btnGuardarEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_guardaEvento" />
+
+        <Button
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/btnCancelarEve"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_Cancelar" />
+
+    </LinearLayout>
+
+    <!-- NavigationView (menú lateral) -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

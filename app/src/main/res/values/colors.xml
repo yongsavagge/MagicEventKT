@@ -2,9 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="blanco_suave">#FADEE2</color>
+    <color name="blanco_suave">#E1BBC1</color>
     <color name="rosa">#EF626C</color>
     <color name="negro_puro">#22181C</color>
     <color name="negro_suave">#312F2F</color>
-    <color name="calipso">#84DCCF</color>
+    <color name="calipso">#B1F3E9</color>
 </resources>

@@ -62,11 +62,6 @@ class menuInicio : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
             startActivity(intentProfile)
         }
 
-        val btnConfigs = findViewById<Button>(R.id.btnConfigs)
-        btnConfigs.setOnClickListener {
-            val intentConfig = Intent(this, ConfigActivity::class.java)
-            startActivity(intentConfig)
-        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -74,13 +69,11 @@ class menuInicio : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
         val intentMisEve = Intent(this, MisEventosActivity::class.java)
         val intentCalen = Intent(this, CalendarActivity::class.java)
         val intentProfile = Intent(this, ProfileActivity::class.java)
-        val intentConfig = Intent(this, ConfigActivity::class.java)
         when (item.itemId){
             R.id.nav_itemNuevo -> startActivity(intentCrear)
             R.id.nav_itemMisEve -> startActivity(intentMisEve)
             R.id.nav_itemCalendario -> startActivity(intentCalen)
             R.id.nav_itemPerfil -> startActivity(intentProfile)
-            R.id.nav_itemConfig -> startActivity(intentConfig)
         }
         drawer.closeDrawer(GravityCompat.START)
         return true

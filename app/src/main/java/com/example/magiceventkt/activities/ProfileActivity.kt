@@ -4,13 +4,20 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.magiceventkt.R
 import com.example.magiceventkt.models.PerfilModel
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -18,7 +25,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class ProfileActivity : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var etFirstName: EditText
     private lateinit var etLastName: EditText
     private lateinit var etPhone: EditText
@@ -28,6 +35,9 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var dbRef: DatabaseReference
     private var isEditMode = false
     private lateinit var sharedPreferences: SharedPreferences
+
+    private lateinit var drawer: DrawerLayout
+    private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +82,50 @@ class ProfileActivity : AppCompatActivity() {
             val alertDialog = builder.create()
             alertDialog.show()
         }
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar_main)
+        setSupportActionBar(toolbar)
+
+        drawer = findViewById(R.id.drawer_layout)
+
+        toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer.addDrawerListener(toggle)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener(this)
+
+    }
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        val intentCrear = Intent(this, CrearEventoActivity::class.java)
+        val intentMisEve = Intent(this, MisEventosActivity::class.java)
+        val intentCalen = Intent(this, CalendarActivity::class.java)
+        when (item.itemId){
+            R.id.nav_itemNuevo -> startActivity(intentCrear)
+            R.id.nav_itemMisEve -> startActivity(intentMisEve)
+            R.id.nav_itemCalendario -> startActivity(intentCalen)
+        }
+        drawer.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?){
+        super.onPostCreate(savedInstanceState)
+        toggle.syncState()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        toggle.onConfigurationChanged(newConfig)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (toggle.onOptionsItemSelected(item)){
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun cerrarSesion() {
