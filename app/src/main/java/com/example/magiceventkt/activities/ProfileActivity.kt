@@ -55,14 +55,22 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         dbRef = FirebaseDatabase.getInstance().getReference("PerfilUsuario")
         sharedPreferences = getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
 
-        // Leer datos del perfil y mostrarlos al iniciar la actividad
-        leerDatosPerfil()
+        // Obtener el ID del usuario actual
+        val usuarioID = FirebaseAuth.getInstance().currentUser?.uid
+
+        // Verificar si el ID del usuario es nulo antes de llamar a la función leerDatosPerfil()
+        if (usuarioID != null) {
+            leerDatosPerfil(usuarioID)
+        } else {
+            // Manejar el caso en que el ID del usuario es nulo
+        }
+
         isEditMode = false
 
         // Configurar el botón de guardado o edición
         btnSave.setOnClickListener {
             if (isEditMode) {
-                guardarCambios()
+                guardarCambios(usuarioID)
             } else {
                 habilitarEdicion()
             }
@@ -145,7 +153,7 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         finish()
     }
 
-    private fun guardarCambios() {
+    private fun guardarCambios(usuarioID: String?) {
         val firstName = etFirstName.text.toString()
         val lastName = etLastName.text.toString()
         val phone = etPhone.text.toString()
@@ -168,29 +176,27 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             return
         }
 
-        val usuarioID = "usuarioID"
+        if (usuarioID != null) {
+            val usuario = PerfilModel(usuarioID, firstName, lastName, phone, email)
 
-        val usuario = PerfilModel(usuarioID, firstName, lastName, phone, email)
+            dbRef.child(usuarioID).setValue(usuario).addOnCompleteListener {
+                Toast.makeText(this, "El perfil ha sido actualizado con éxito!", Toast.LENGTH_SHORT).show()
+                deshabilitarEdicion()
 
-        dbRef.child(usuarioID).setValue(usuario).addOnCompleteListener {
-            Toast.makeText(this, "El perfil ha sido actualizado con éxito!", Toast.LENGTH_SHORT).show()
-            deshabilitarEdicion()
-
-            // Guardar los datos en SharedPreferences
-            val editor = sharedPreferences.edit()
-            editor.putString("firstName", firstName)
-            editor.putString("lastName", lastName)
-            editor.putString("phone", phone)
-            editor.putString("email", email)
-            editor.apply()
-        }.addOnFailureListener { err ->
-            Toast.makeText(this, "Favor, revisa los datos ingresados", Toast.LENGTH_SHORT).show()
+                // Guardar los datos en SharedPreferences
+                val editor = sharedPreferences.edit()
+                editor.putString("firstName", firstName)
+                editor.putString("lastName", lastName)
+                editor.putString("phone", phone)
+                editor.putString("email", email)
+                editor.apply()
+            }.addOnFailureListener { err ->
+                Toast.makeText(this, "Favor, revisa los datos ingresados", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    private fun leerDatosPerfil() {
-        val usuarioID = "usuarioID"
-
+    private fun leerDatosPerfil(usuarioID: String) {
         dbRef.child(usuarioID).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -206,13 +212,6 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                 Toast.makeText(this@ProfileActivity, "Error al leer los datos del perfil", Toast.LENGTH_SHORT).show()
             }
         })
-
-        // Cargar los datos almacenados en SharedPreferences con operador ?.
-        val firstName = sharedPreferences.getString("firstName", "")
-        val lastName = sharedPreferences.getString("lastName", "")
-        val phone = sharedPreferences.getString("phone", "")
-        val email = sharedPreferences.getString("email", "")
-        mostrarDatosDePerfil(PerfilModel("usuarioID", firstName, lastName, phone, email))
     }
 
     private fun habilitarEdicion() {

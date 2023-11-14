@@ -28,6 +28,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <Button
+            android:id="@+id/btn_aggrEve"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/agg_even" />
+
+        <!-- RecyclerView para mostrar eventos -->
+
+
     </LinearLayout>
 
     <!-- NavigationView (menú lateral) -->

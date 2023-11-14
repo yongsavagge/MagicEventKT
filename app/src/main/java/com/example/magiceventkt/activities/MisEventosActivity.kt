@@ -125,6 +125,7 @@ class MisEventosActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         toggle.syncState()
     }
 
+
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         // Actualizar la configuración del ActionBarDrawerToggle en función de la configuración de la actividad
