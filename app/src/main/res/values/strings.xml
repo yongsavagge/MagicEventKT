@@ -33,4 +33,8 @@
     <string name="reg">Guardar Registro</string>
     <string name="noaccount">Crea una cuenta aquí</string>
     <string name="agg_even">Agregar Evento</string>
+    <string name="iniciar">Iniciar Sesión</string>
+    <string name="olvidaste">¿Olvidaste tu contraseña?</string>
+    <string name="catEven">Categoría del Evento</string>
+    <string name="infoe">Ingresa la categoría del evento</string>
 </resources>

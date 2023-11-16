@@ -55,6 +55,18 @@
             android:hint="@string/ubi_evento"
             android:inputType="text" />
 
+        <TextView
+            android:id="@+id/tvInfoe"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="@string/infoe"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spnCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="51dp" />
+
         <Button
             style="@style/Widget.Material3.Button.ElevatedButton"
             android:id="@+id/btnGuardarEvento"

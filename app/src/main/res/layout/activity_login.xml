@@ -33,14 +33,20 @@
 
     <Button
         android:id="@+id/btnInicioSesion"
-        android:layout_width="418dp"
+        android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:text="Iniciar Sesión" />
+        android:text="@string/iniciar" />
 
     <Button
         android:id="@+id/btnRegistrate"
-        android:layout_width="418dp"
-        android:layout_height="64dp"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
         android:text="@string/noaccount" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:text="@string/olvidaste" />
 
 </LinearLayout>

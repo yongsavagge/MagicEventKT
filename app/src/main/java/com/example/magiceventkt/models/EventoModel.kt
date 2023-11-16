@@ -4,5 +4,6 @@ data class EventoModel(
     var nombreEvento: String? = null,
     var desc: String? = null,
     var fecha: String? = null,
-    var ubicacion: String? = null
+    var ubicacion: String? = null,
+    var categoria: String? = null
 )

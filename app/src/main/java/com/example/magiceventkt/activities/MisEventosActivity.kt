@@ -90,6 +90,7 @@ class MisEventosActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                             intent.putExtra("desc", eventoList[position].desc)
                             intent.putExtra("fecha", eventoList[position].fecha)
                             intent.putExtra("ubicacion", eventoList[position].ubicacion)
+                            intent.putExtra("categoria", eventoList[position].categoria)
                             startActivity(intent)
                         }
                     })

@@ -32,6 +32,7 @@ class eveRecyclerAdapter (private val eventList : ArrayList<EventoModel>) : Recy
         holder.tvDesc.text = currentEvent.desc
         holder.tvFecha.text = currentEvent.fecha
         holder.tvUbi.text = currentEvent.ubicacion
+        holder.tvCategoria.text = currentEvent.categoria
     }
 
     override fun getItemCount(): Int {
@@ -43,6 +44,7 @@ class eveRecyclerAdapter (private val eventList : ArrayList<EventoModel>) : Recy
         val tvDesc : TextView = itemView.findViewById(R.id.tvDesc)
         val tvFecha : TextView = itemView.findViewById(R.id.tvFecha)
         val tvUbi : TextView = itemView.findViewById(R.id.tvUbicacion)
+        val tvCategoria : TextView = itemView.findViewById(R.id.tvCategoria)
 
         init {
             itemView.setOnClickListener {

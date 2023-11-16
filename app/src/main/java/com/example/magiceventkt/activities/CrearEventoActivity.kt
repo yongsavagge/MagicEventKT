@@ -12,6 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import android.content.res.Configuration
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.magiceventkt.R
 import com.example.magiceventkt.models.EventoModel
@@ -31,6 +35,7 @@ class CrearEventoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     private lateinit var dbRef: DatabaseReference
     private lateinit var drawer: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var spnCategoria: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +49,30 @@ class CrearEventoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         txtFecha = findViewById(R.id.editFecha) // Cambiado a TextView
         editUbicacion = findViewById(R.id.editUbicacion)
         btnGuardarEvento = findViewById(R.id.btnGuardarEvento)
+        spnCategoria = findViewById(R.id.spnCategoria)
+        val categorias = arrayOf(
+            "Cultural",
+            "Deportivo",
+            "Corporativo",
+            "Educativo",
+            "Celebración Social",
+            "Religioso",
+            "Benéfico",
+            "Gastronómico",
+            "Tecnológico",
+            "Otro"
+        )
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categorias)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spnCategoria.adapter = adapter
+        spnCategoria.setSelection(9, false)
+        spnCategoria.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+            }
+        }
 
         drawer = findViewById(R.id.drawer_layout)
         toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -134,14 +163,15 @@ class CrearEventoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         val desc = editDesc.text.toString().trim()
         val fecha = txtFecha.text.toString().trim()
         val ubicacion = editUbicacion.text.toString().trim()
+        val categoria = spnCategoria.selectedItem.toString().trim()
 
-        if (nombreEvento.isEmpty() || desc.isEmpty() || fecha.isEmpty() || ubicacion.isEmpty()) {
+        if (nombreEvento.isEmpty() || desc.isEmpty() || fecha.isEmpty() || ubicacion.isEmpty() || categoria.isEmpty()) {
             Toast.makeText(this, "Por favor, completa todos los campos del evento", Toast.LENGTH_SHORT).show()
             return
         }
 
         val eventoID = dbRef.push().key!!
-        val evento = EventoModel(eventoID, nombreEvento, desc, fecha, ubicacion)
+        val evento = EventoModel(eventoID, nombreEvento, desc, fecha, ubicacion, categoria)
 
         dbRef.child(eventoID).setValue(evento).addOnCompleteListener {
             Toast.makeText(this, "El evento ha sido agregado con éxito!", Toast.LENGTH_SHORT).show()
@@ -149,6 +179,7 @@ class CrearEventoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             editDesc.text = ""
             txtFecha.text = ""
             editUbicacion.text = ""
+            spnCategoria.setSelection(9, false)
         }.addOnFailureListener { err ->
             Toast.makeText(this, "El evento no ha podido ser creado con éxito", Toast.LENGTH_SHORT).show()
         }
