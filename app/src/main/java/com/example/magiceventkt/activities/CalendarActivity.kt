@@ -1,5 +1,6 @@
 package com.example.magiceventkt.activities
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -14,6 +15,7 @@ import android.content.res.Configuration
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.magiceventkt.R
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 
 class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -52,7 +54,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 intentCrear.putExtra("selectedDate", selectedDate)
                 startActivity(intentCrear)
             } else {
-                Toast.makeText(this, "Please select a date first", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Por favor, selecciona primero una fecha", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -64,6 +66,20 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val intentCrear = Intent(this, CrearEventoActivity::class.java)
         val intentMisEve = Intent(this, MisEventosActivity::class.java)
         val intentProfile = Intent(this, ProfileActivity::class.java)
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(R.string.closesession)
+        builder.setMessage(R.string.cerrarSesionApprove)
+
+        builder.setPositiveButton(R.string.approve) { dialog, which ->
+            cerrarSesion() // Función para cerrar sesión
+        }
+
+        builder.setNegativeButton(R.string.deny) { dialog, which ->
+            dialog.dismiss()
+        }
+
+        val alertDialog = builder.create()
+        alertDialog.show()
 
         when (item.itemId) {
             R.id.nav_itemNuevo -> startActivity(intentCrear)
@@ -90,5 +106,12 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+    private fun cerrarSesion() {
+        FirebaseAuth.getInstance().signOut()
+        Toast.makeText(this, "Has cerrado sesión exitosamente!", Toast.LENGTH_SHORT).show()
+        val intentLogin = Intent(this, LoginActivity::class.java)
+        startActivity(intentLogin)
+        finish()
     }
 }

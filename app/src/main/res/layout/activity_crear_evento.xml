@@ -21,39 +21,68 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways" />
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:padding="10dp"
+            />
 
-        <EditText
-            android:id="@+id/editNombreEvento"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etNEvento"
             android:layout_width="match_parent"
-            android:layout_height="94dp"
-            android:ems="10"
+            android:layout_height="wrap_content"
             android:hint="@string/nombre_evento"
-            android:inputType="text" />
+            android:padding="10dp">
 
-        <EditText
-            android:id="@+id/editDesc"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editNombreEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etDesc"
             android:layout_width="match_parent"
-            android:layout_height="142dp"
-            android:ems="10"
+            android:layout_height="wrap_content"
             android:hint="@string/desc_evento"
-            android:inputType="text" />
+            android:padding="10dp">
 
-        <EditText
-            android:id="@+id/editFecha"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etFecha"
             android:layout_width="match_parent"
-            android:layout_height="99dp"
-            android:ems="10"
+            android:layout_height="wrap_content"
             android:hint="@string/fecha_evento"
-            android:inputType="date" />
+            android:padding="10dp">
 
-        <EditText
-            android:id="@+id/editUbicacion"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editFecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etUbicacion"
             android:layout_width="match_parent"
-            android:layout_height="86dp"
-            android:ems="10"
+            android:layout_height="wrap_content"
             android:hint="@string/ubi_evento"
-            android:inputType="text" />
+            android:padding="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editUbicacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <TextView
             android:id="@+id/tvInfoe"
@@ -65,7 +94,8 @@
         <Spinner
             android:id="@+id/spnCategoria"
             android:layout_width="match_parent"
-            android:layout_height="51dp" />
+            android:layout_height="51dp"
+            />
 
         <Button
             style="@style/Widget.Material3.Button.ElevatedButton"

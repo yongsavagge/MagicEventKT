@@ -53,7 +53,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/fecha_evento"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="@color/black" />
+                android:textColor="?android:attr/textColorSecondary"/>
 
             <TextView
                 android:id="@+id/tvUbicacion"
