@@ -66,25 +66,26 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val intentCrear = Intent(this, CrearEventoActivity::class.java)
         val intentMisEve = Intent(this, MisEventosActivity::class.java)
         val intentProfile = Intent(this, ProfileActivity::class.java)
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(R.string.closesession)
-        builder.setMessage(R.string.cerrarSesionApprove)
-
-        builder.setPositiveButton(R.string.approve) { dialog, which ->
-            cerrarSesion() // Función para cerrar sesión
-        }
-
-        builder.setNegativeButton(R.string.deny) { dialog, which ->
-            dialog.dismiss()
-        }
-
-        val alertDialog = builder.create()
-        alertDialog.show()
-
         when (item.itemId) {
             R.id.nav_itemNuevo -> startActivity(intentCrear)
             R.id.nav_itemMisEve -> startActivity(intentMisEve)
             R.id.nav_itemPerfil -> startActivity(intentProfile)
+            R.id.nav_CerrarSesion -> {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle(R.string.closesession)
+                builder.setMessage(R.string.cerrarSesionApprove)
+
+                builder.setPositiveButton(R.string.approve) { dialog, which ->
+                    cerrarSesion() // Función para cerrar sesión
+                }
+
+                builder.setNegativeButton(R.string.deny) { dialog, which ->
+                    dialog.dismiss()
+                }
+
+                val alertDialog = builder.create()
+                alertDialog.show()
+            }
         }
 
         drawer.closeDrawer(GravityCompat.START)

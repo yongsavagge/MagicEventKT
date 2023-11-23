@@ -29,6 +29,7 @@
             android:id="@+id/etNEvento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
             android:hint="@string/nombre_evento"
             android:padding="10dp">
 
@@ -43,6 +44,7 @@
             android:id="@+id/etDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
             android:hint="@string/desc_evento"
             android:padding="10dp">
 
@@ -57,6 +59,7 @@
             android:id="@+id/etFecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
             android:hint="@string/fecha_evento"
             android:padding="10dp">
 
@@ -73,6 +76,7 @@
             android:id="@+id/etUbicacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
             android:hint="@string/ubi_evento"
             android:padding="10dp">
 
@@ -88,6 +92,7 @@
             android:id="@+id/tvInfoe"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:layout_marginHorizontal="40dp"
             android:text="@string/infoe"
             android:textSize="16sp" />
 
@@ -95,6 +100,7 @@
             android:id="@+id/spnCategoria"
             android:layout_width="match_parent"
             android:layout_height="51dp"
+            android:layout_marginHorizontal="40dp"
             />
 
         <Button
@@ -102,6 +108,7 @@
             android:id="@+id/btnGuardarEvento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
             android:text="@string/btn_guardaEvento" />
 
     </LinearLayout>

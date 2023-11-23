@@ -19,6 +19,7 @@
         android:id="@+id/userEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="55dp"
         android:hint="Usuario"
         android:padding="10dp">
 
@@ -31,6 +32,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/pswEditText"
+        android:layout_marginHorizontal="55dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Contraseña"
@@ -48,12 +50,14 @@
     <Button
         android:id="@+id/btnInicioSesion"
         android:layout_width="match_parent"
+        android:layout_marginHorizontal="100dp"
         android:layout_height="64dp"
         android:text="@string/iniciar" />
 
     <Button
         android:id="@+id/btnRegistrate"
         android:layout_width="match_parent"
+        android:layout_marginHorizontal="100dp"
         android:layout_height="62dp"
         android:text="@string/noaccount" />
 
@@ -61,6 +65,7 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="59dp"
+        android:layout_marginHorizontal="100dp"
         android:text="@string/olvidaste" />
 
 </LinearLayout>

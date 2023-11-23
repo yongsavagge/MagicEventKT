@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/welcome"
+            android:textStyle="italic"
             android:textSize="24sp" />
 
         <Button

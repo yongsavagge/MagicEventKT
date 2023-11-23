@@ -29,7 +29,7 @@
         <ImageView
             android:id="@+id/imgLogo_Profile"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="171dp"
             android:src="@drawable/logo2" />
 
         <TextView
@@ -43,6 +43,7 @@
             android:id="@+id/etNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="55dp"
             android:hint="Nombre"
             android:padding="10dp">
 
@@ -58,6 +59,7 @@
             android:id="@+id/etApellido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="55dp"
             android:hint="Apellido"
             android:padding="10dp">
 
@@ -71,6 +73,7 @@
             android:id="@+id/etNumero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="55dp"
             android:hint="Teléfono"
             android:padding="10dp"
             >
@@ -86,6 +89,7 @@
             android:id="@+id/etCorreo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="55dp"
             android:hint="Correo"
             android:padding="10dp"
             >
