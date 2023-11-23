@@ -1,5 +1,6 @@
 package com.example.magiceventkt.activities
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -20,6 +21,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.magiceventkt.R
 import com.example.magiceventkt.models.EventoModel
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
@@ -130,7 +132,20 @@ class CrearEventoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         val intentMisEve = Intent(this, MisEventosActivity::class.java)
         val intentCalen = Intent(this, CalendarActivity::class.java)
         val intentProfile = Intent(this, ProfileActivity::class.java)
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(R.string.closesession)
+        builder.setMessage(R.string.cerrarSesionApprove)
 
+        builder.setPositiveButton(R.string.approve) { dialog, which ->
+            cerrarSesion() // Función para cerrar sesión
+        }
+
+        builder.setNegativeButton(R.string.deny) { dialog, which ->
+            dialog.dismiss()
+        }
+
+        val alertDialog = builder.create()
+        alertDialog.show()
         when (item.itemId) {
             R.id.nav_itemMisEve -> startActivity(intentMisEve)
             R.id.nav_itemCalendario -> startActivity(intentCalen)
@@ -183,5 +198,12 @@ class CrearEventoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         }.addOnFailureListener { err ->
             Toast.makeText(this, "El evento no ha podido ser creado con éxito", Toast.LENGTH_SHORT).show()
         }
+    }
+    private fun cerrarSesion() {
+        FirebaseAuth.getInstance().signOut()
+        Toast.makeText(this, "Has cerrado sesión exitosamente!", Toast.LENGTH_SHORT).show()
+        val intentLogin = Intent(this, LoginActivity::class.java)
+        startActivity(intentLogin)
+        finish()
     }
 }

@@ -1,10 +1,12 @@
 package com.example.magiceventkt.activities
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -17,6 +19,7 @@ import com.example.magiceventkt.adapters.eveRecyclerAdapter
 import com.example.magiceventkt.models.EventoModel
 import com.example.magiceventkt.models.editActivity
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -110,6 +113,20 @@ class MisEventosActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         val intentCrear = Intent(this, CrearEventoActivity::class.java)
         val intentCalen = Intent(this, CalendarActivity::class.java)
         val intentProfile = Intent(this, ProfileActivity::class.java)
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(R.string.closesession)
+        builder.setMessage(R.string.cerrarSesionApprove)
+
+        builder.setPositiveButton(R.string.approve) { dialog, which ->
+            cerrarSesion() // Función para cerrar sesión
+        }
+
+        builder.setNegativeButton(R.string.deny) { dialog, which ->
+            dialog.dismiss()
+        }
+
+        val alertDialog = builder.create()
+        alertDialog.show()
         when (item.itemId) {
             R.id.nav_itemNuevo -> startActivity(intentCrear)
             R.id.nav_itemCalendario -> startActivity(intentCalen)
@@ -139,5 +156,12 @@ class MisEventosActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+    private fun cerrarSesion() {
+        FirebaseAuth.getInstance().signOut()
+        Toast.makeText(this, "Has cerrado sesión exitosamente!", Toast.LENGTH_SHORT).show()
+        val intentLogin = Intent(this, LoginActivity::class.java)
+        startActivity(intentLogin)
+        finish()
     }
 }
