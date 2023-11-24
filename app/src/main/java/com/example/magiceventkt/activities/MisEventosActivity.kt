@@ -71,42 +71,54 @@ class MisEventosActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
     // Función para obtener datos de eventos desde Firebase
     private fun getEventData() {
-        eveRecyclerView.visibility = View.VISIBLE
-        dbRef = FirebaseDatabase.getInstance().getReference("CreacionEvento")
-        dbRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                eventoList.clear()
-                if (snapshot.exists()) {
-                    for (eveSnp in snapshot.children) {
-                        val eventData = eveSnp.getValue(EventoModel::class.java)
-                        eventoList.add(eventData!!)
-                    }
-                    // Configuración del adaptador para el RecyclerView
-                    val mAdapter = eveRecyclerAdapter(eventoList)
-                    eveRecyclerView.adapter = mAdapter
-                    mAdapter.setOnItemClickListener(object : eveRecyclerAdapter.onItemClickListener {
-                        override fun onItemClick(position: Int) {
-                            // Redirigir a la actividad de edición con los detalles del evento
-                            val intent = Intent(this@MisEventosActivity, editActivity::class.java)
-                            intent.putExtra("eventoID", eventoList[position].eventoID)
-                            intent.putExtra("nombreEvento", eventoList[position].nombreEvento)
-                            intent.putExtra("desc", eventoList[position].desc)
-                            intent.putExtra("fecha", eventoList[position].fecha)
-                            intent.putExtra("ubicacion", eventoList[position].ubicacion)
-                            intent.putExtra("categoria", eventoList[position].categoria)
-                            startActivity(intent)
-                        }
-                    })
-                    eveRecyclerView.visibility = View.VISIBLE
-                }
-            }
+        // Obtener el UID del usuario actual
+        val usuario = FirebaseAuth.getInstance().currentUser
+        val usuarioID = usuario?.uid
 
-            override fun onCancelled(error: DatabaseError) {
-                // Manejo de errores si la operación se cancela
-                TODO("Not yet implemented")
-            }
-        })
+        // Verificar que se pudo obtener el UID del usuario
+        if (usuarioID != null) {
+            eveRecyclerView.visibility = View.VISIBLE
+            val eventosRef = FirebaseDatabase.getInstance().getReference("Usuarios").child(usuarioID).child("Eventos")
+
+            eventosRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    eventoList.clear()
+                    if (snapshot.exists()) {
+                        for (eveSnp in snapshot.children) {
+                            val eventData = eveSnp.getValue(EventoModel::class.java)
+                            eventoList.add(eventData!!)
+                        }
+                        // Configuración del adaptador para el RecyclerView
+                        val mAdapter = eveRecyclerAdapter(eventoList)
+                        eveRecyclerView.adapter = mAdapter
+                        mAdapter.setOnItemClickListener(object : eveRecyclerAdapter.onItemClickListener {
+                            override fun onItemClick(position: Int) {
+                                // Redirigir a la actividad de edición con los detalles del evento
+                                val intent = Intent(this@MisEventosActivity, editActivity::class.java)
+                                intent.putExtra("eventoID", eventoList[position].eventoID)
+                                intent.putExtra("nombreEvento", eventoList[position].nombreEvento)
+                                intent.putExtra("desc", eventoList[position].desc)
+                                intent.putExtra("fecha", eventoList[position].fecha)
+                                intent.putExtra("ubicacion", eventoList[position].ubicacion)
+                                intent.putExtra("categoria", eventoList[position].categoria)
+                                startActivity(intent)
+                            }
+                        })
+                        eveRecyclerView.visibility = View.VISIBLE
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Manejo de errores si la operación se cancela
+                    Toast.makeText(this@MisEventosActivity, "Error al obtener datos de eventos", Toast.LENGTH_SHORT).show()
+                }
+            })
+        } else {
+            Toast.makeText(this, "No se pudo obtener el ID del usuario. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show()
+            // Aquí puedes redirigir al usuario a la pantalla de inicio de sesión o realizar otra acción apropiada.
+        }
     }
+
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Definición de las intenciones para otras actividades

@@ -179,29 +179,48 @@ class CrearEventoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     }
 
     private fun guardarDatosEvento() {
-        val nombreEvento = editNombreEvento.text.toString().trim()
-        val desc = editDesc.text.toString().trim()
-        val fecha = txtFecha.text.toString().trim()
-        val ubicacion = editUbicacion.text.toString().trim()
-        val categoria = spnCategoria.selectedItem.toString().trim()
+        // Obtener el UID del usuario actual
+        val usuario = FirebaseAuth.getInstance().currentUser
+        val usuarioID = usuario?.uid
 
-        if (nombreEvento.isEmpty() || desc.isEmpty() || fecha.isEmpty() || ubicacion.isEmpty() || categoria.isEmpty()) {
-            Toast.makeText(this, "Por favor, completa todos los campos del evento", Toast.LENGTH_SHORT).show()
-            return
-        }
+        // Verificar que se pudo obtener el UID del usuario
+        if (usuarioID != null) {
+            val eventosRef = FirebaseDatabase.getInstance().getReference("Usuarios").child(usuarioID).child("Eventos")
 
-        val eventoID = dbRef.push().key!!
-        val evento = EventoModel(eventoID, nombreEvento, desc, fecha, ubicacion, categoria)
+            val nombreEvento = editNombreEvento.text.toString().trim()
+            val desc = editDesc.text.toString().trim()
+            val fecha = txtFecha.text.toString().trim()
+            val ubicacion = editUbicacion.text.toString().trim()
+            val categoria = spnCategoria.selectedItem.toString().trim()
 
-        dbRef.child(eventoID).setValue(evento).addOnCompleteListener {
-            Toast.makeText(this, "El evento ha sido agregado con éxito!", Toast.LENGTH_SHORT).show()
-            editNombreEvento.text = ""
-            editDesc.text = ""
-            txtFecha.text = ""
-            editUbicacion.text = ""
-            spnCategoria.setSelection(9, false)
-        }.addOnFailureListener { err ->
-            Toast.makeText(this, "El evento no ha podido ser creado con éxito", Toast.LENGTH_SHORT).show()
+            // Verificar que todos los campos del evento estén completos
+            if (nombreEvento.isEmpty() || desc.isEmpty() || fecha.isEmpty() || ubicacion.isEmpty() || categoria.isEmpty()) {
+                Toast.makeText(this, "Por favor, completa todos los campos del evento", Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            // Generar un ID único para el evento
+            val eventoID = eventosRef.push().key!!
+
+            // Crear un objeto EventoModel con los datos del evento
+            val evento = EventoModel(eventoID, nombreEvento, desc, fecha, ubicacion, categoria)
+            // Guardar el evento en la base de datos
+            eventosRef.child(eventoID).setValue(evento).addOnCompleteListener {
+                Toast.makeText(this, "El evento ha sido agregado con éxito!", Toast.LENGTH_SHORT).show()
+
+                // Restablecer los campos después de guardar el evento
+                editNombreEvento.text = ""
+                editDesc.text = ""
+                txtFecha.text = ""
+                editUbicacion.text = ""
+                spnCategoria.setSelection(9, false)
+
+            }.addOnFailureListener { err ->
+                Toast.makeText(this, "El evento no ha podido ser creado con éxito", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(this, "No se pudo obtener el ID del usuario. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show()
+            // Aquí puedes redirigir al usuario a la pantalla de inicio de sesión o realizar otra acción apropiada.
         }
     }
     private fun cerrarSesion() {

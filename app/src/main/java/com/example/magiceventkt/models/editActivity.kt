@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.magiceventkt.R
 import com.example.magiceventkt.activities.MisEventosActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 class editActivity : AppCompatActivity() {
@@ -64,19 +65,24 @@ class editActivity : AppCompatActivity() {
         setValuesToViews()
     }
 
-    private fun deleteRecord(
-        eventoID: String
-    ) {
-        val dbRef = FirebaseDatabase.getInstance().getReference("CreacionEvento").child(eventoID)
-        val mTask = dbRef.removeValue()
+    private fun deleteRecord(eventoID: String) {
+        val usuarioID = FirebaseAuth.getInstance().currentUser?.uid
+        if (usuarioID != null) {
+            val eventosRef =
+                FirebaseDatabase.getInstance().getReference("Usuarios").child(usuarioID)
+                    .child("Eventos")
+            val dbRef = eventosRef.child(eventoID)
 
-        mTask.addOnSuccessListener {
-            Toast.makeText(this, "Evento borrado exitosamente", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, MisEventosActivity::class.java)
-            finish()
-            startActivity(intent)
-        }.addOnFailureListener { error ->
-            Toast.makeText(this, "Error al borrar el evento", Toast.LENGTH_SHORT).show()
+            val mTask = dbRef.removeValue()
+
+            mTask.addOnSuccessListener {
+                Toast.makeText(this, "Evento borrado exitosamente", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MisEventosActivity::class.java)
+                finish()
+                startActivity(intent)
+            }.addOnFailureListener { error ->
+                Toast.makeText(this, "Error al borrar el evento", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -85,7 +91,7 @@ class editActivity : AppCompatActivity() {
     }
 
     private fun setValuesToViews() {
-        tvNombre.text = "Nombre del Evento: " +intent.getStringExtra("nombreEvento")
+        tvNombre.text = "Nombre del Evento: " + intent.getStringExtra("nombreEvento")
         tvDesc.text = "Descripción: " + intent.getStringExtra("desc")
         tvFecha.text = "Fecha: " + intent.getStringExtra("fecha")
         tvUbicacion.text = "Ubicación: " + intent.getStringExtra("ubicacion")
@@ -166,8 +172,21 @@ class editActivity : AppCompatActivity() {
         ubicacion: String,
         categoria: String
     ) {
-        val dbRef = FirebaseDatabase.getInstance().getReference("CreacionEvento").child(eventoID)
-        val eventInfo = EventoModel(eventoID, nombreEvento, desc, fecha, ubicacion, categoria)
-        dbRef.setValue(eventInfo)
+        val usuarioID = FirebaseAuth.getInstance().currentUser?.uid
+        if (usuarioID != null) {
+            val eventosRef =
+                FirebaseDatabase.getInstance().getReference("Usuarios").child(usuarioID)
+                    .child("Eventos")
+            val dbRef = eventosRef.child(eventoID)
+
+            val eventInfo = EventoModel(eventoID, nombreEvento, desc, fecha, ubicacion, categoria)
+            dbRef.setValue(eventInfo).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Evento actualizado", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Error al actualizar el evento", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 }

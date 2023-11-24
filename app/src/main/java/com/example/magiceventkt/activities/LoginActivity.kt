@@ -7,9 +7,7 @@ import android.widget.Button
 import android.widget.Toast
 import com.example.magiceventkt.R
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -26,7 +24,14 @@ class LoginActivity : AppCompatActivity() {
         val contrasena = findViewById<TextInputEditText>(R.id.toETContrasena)
 
         btnInicioSesion.setOnClickListener {
-            signIn(usuario.text.toString(), contrasena.text.toString())
+            val email = usuario.text.toString()
+            val password = contrasena.text.toString()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+            } else {
+                signIn(email, password)
+            }
         }
 
         val btnCreaCuenta = findViewById<Button>(R.id.btnRegistrate)
