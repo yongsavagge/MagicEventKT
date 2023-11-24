@@ -85,7 +85,6 @@ class CrearEventoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
 
-        dbRef = FirebaseDatabase.getInstance().getReference("CreacionEvento")
 
         btnGuardarEvento.setOnClickListener {
             guardarDatosEvento()

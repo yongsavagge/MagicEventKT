@@ -29,7 +29,7 @@
         <ImageView
             android:id="@+id/imgLogo_Profile"
             android:layout_width="match_parent"
-            android:layout_height="171dp"
+            android:layout_height="109dp"
             android:src="@drawable/logo2" />
 
         <TextView
@@ -37,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/welc_profile"
+            android:layout_marginHorizontal="55dp"
             android:textSize="22sp" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -108,21 +109,31 @@
 
         <!-- Botón para guardar cambios -->
         <Button
-            style="@style/Widget.Material3.Button.ElevatedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/editchanges"
             android:id="@+id/btnSave"
-            android:layout_gravity="center" />
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/editchanges" />
 
         <!-- Botón para cerrar sesión -->
         <Button
+            android:id="@+id/btnCambiarPass"
             style="@style/Widget.Material3.Button.ElevatedButton"
-            android:id="@+id/btnCloseSession"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:text="@string/closesession"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="55dp"
+            android:text="@string/cambiap" />
+
+        <Button
+            android:id="@+id/btnCloseSession"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="55dp"
+            android:text="@string/closesession" />
 
     </LinearLayout>
 

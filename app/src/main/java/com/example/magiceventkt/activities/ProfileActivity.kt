@@ -31,6 +31,7 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     private lateinit var etPhone: EditText
     private lateinit var etEmail: EditText
     private lateinit var btnSave: Button
+    private lateinit var btnCambiarPass: Button
     private lateinit var btnCloseSession: Button
     private lateinit var dbRef: DatabaseReference
     private var isEditMode = false
@@ -49,6 +50,7 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         etPhone = findViewById(R.id.etPhone)
         etEmail = findViewById(R.id.etEmail)
         btnSave = findViewById(R.id.btnSave)
+        btnCambiarPass = findViewById(R.id.btnCambiarPass)
         btnCloseSession = findViewById(R.id.btnCloseSession)
 
         // Inicialización de la base de datos y preferencias compartidas
@@ -74,6 +76,10 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             } else {
                 habilitarEdicion()
             }
+        }
+        btnCambiarPass.setOnClickListener {
+            val intent = Intent(this, cambiarContrasena::class.java)
+            startActivity(intent)
         }
 
         // Configurar el botón de cierre de sesión

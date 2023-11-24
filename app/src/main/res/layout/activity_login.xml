@@ -61,11 +61,5 @@
         android:layout_height="62dp"
         android:text="@string/noaccount" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="59dp"
-        android:layout_marginHorizontal="100dp"
-        android:text="@string/olvidaste" />
 
 </LinearLayout>

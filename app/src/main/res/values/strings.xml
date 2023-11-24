@@ -37,4 +37,7 @@
     <string name="olvidaste">¿Olvidaste tu contraseña?</string>
     <string name="catEven">Categoría del Evento</string>
     <string name="infoe">Ingresa la categoría del evento</string>
+    <string name="cambiap">Cambiar Contraseña</string>
+    <string name="newpass">Nueva Contraseña</string>
+    <string name="confirmpass">Confirmar nueva contraseña</string>
 </resources>
