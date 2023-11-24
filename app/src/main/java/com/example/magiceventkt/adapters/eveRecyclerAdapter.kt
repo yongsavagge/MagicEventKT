@@ -28,11 +28,11 @@ class eveRecyclerAdapter (private val eventList : ArrayList<EventoModel>) : Recy
 
     override fun onBindViewHolder(holder: eveRecyclerAdapter.ViewHolder, position: Int) {
         val currentEvent = eventList[position]
-        holder.tvNombre.text = currentEvent.nombreEvento
-        holder.tvDesc.text = currentEvent.desc
-        holder.tvFecha.text = currentEvent.fecha
-        holder.tvUbi.text = currentEvent.ubicacion
-        holder.tvCategoria.text = currentEvent.categoria
+        holder.tvNombre.text = "Nombre Evento: " + currentEvent.nombreEvento
+        holder.tvDesc.text = "Descripción Evento: " +currentEvent.desc
+        holder.tvFecha.text = "Fecha Evento: " + currentEvent.fecha
+        holder.tvUbi.text = "Ubicación Evento: " + currentEvent.ubicacion
+        holder.tvCategoria.text = "Categoria Evento: " + currentEvent.categoria
     }
 
     override fun getItemCount(): Int {
